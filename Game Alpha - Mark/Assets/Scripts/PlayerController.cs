@@ -7,8 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     private float speed = 20.0f;
     private float verticalInput;
-    private float upperLimit = 16;
-    private float lowerLimit = 2;
+    private float horizontalInput;
+    private float xBound = 16;
+    private float yBound = 13;
     private Rigidbody playerRB;
 
     // Start is called before the first frame update
@@ -30,12 +31,32 @@ public class PlayerController : MonoBehaviour
         // Get the vertical input 
         verticalInput = Input.GetAxis("Vertical");
 
-        // Key presses for up and down the y axis of the position 
+        //Get the horizontal input
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        // Move around the screen
         transform.position = transform.position + new Vector3(0, verticalInput * speed * Time.deltaTime, 0);
-
-        // Limit the value the player can move within the y axis for position
-        Mathf.Clamp(transform.position.y, lowerLimit, upperLimit);
+        transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
 
 
+        /* Limit the x and y axis movement won't work will return to this later   
+        if (transform.position.x < xBound)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        }
+
+        else if (transform.position.x < -xBound)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        }
+        */
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
