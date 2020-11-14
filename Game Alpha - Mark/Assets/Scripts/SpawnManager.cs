@@ -9,7 +9,6 @@ public class SpawnManager : MonoBehaviour
     private float powerupSpawnDelay = 3f;
     private float powerupSpawnInterval = 4f;
     private float xSpawnLimit = 38;
-    private float xPowerupSpawn = 20;
     private float ySpawnRange = 11;
     public GameObject[] obstacleOrGifts;
     public GameObject powerup;
@@ -41,7 +40,7 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnPowerup()
     {
-        Vector3 randomSpawn = new Vector3(xPowerupSpawn, Random.Range(-ySpawnRange, ySpawnRange), 0);
+        Vector3 randomSpawn = new Vector3(xSpawnLimit, Random.Range(-ySpawnRange, ySpawnRange), 0);
 
         Instantiate(powerup, randomSpawn, powerup.transform.rotation);
 
