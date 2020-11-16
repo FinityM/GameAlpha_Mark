@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
     private float horizontalInput;
     private float xBound = 16;
-    private float yBound = 13;
+    private float yBound = 11;
     private Rigidbody playerRB;
 
     // Start is called before the first frame update
@@ -39,17 +39,27 @@ public class PlayerController : MonoBehaviour
         transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
 
 
-        /* Limit the x and y axis movement won't work will return to this later   
-        if (transform.position.x < xBound)
+        //Limit the x and y axis movement won't work will return to this later   
+        if (transform.position.x > xBound)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(xBound, transform.position.y, transform.position.z);
         }
 
         else if (transform.position.x < -xBound)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
         }
-        */
+
+        if (transform.position.y > yBound)
+        {
+            transform.position = new Vector3(transform.position.x, yBound, transform.position.z);
+        }
+
+        else if (transform.position.y < -yBound)
+        {
+            transform.position = new Vector3(transform.position.x, -yBound, transform.position.z);
+        }
+
     }
 
     private void OnCollisionEnter(Collision other)
