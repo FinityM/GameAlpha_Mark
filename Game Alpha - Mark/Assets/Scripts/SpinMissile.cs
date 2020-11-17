@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpinMissile : MonoBehaviour
 {
+    // Empty script for beta
     // Start is called before the first frame update
     void Start()
     {

@@ -8,9 +8,12 @@ public class SpawnManager : MonoBehaviour
     private float spawnInterval = 3f;
     private float powerupSpawnDelay = 3f;
     private float powerupSpawnInterval = 4f;
-    private float xSpawnLimit = 38;
+    private float cloudSpawnDelay = 4f;
+    private float cloudSpawnInterval = 5f; 
+    private float xSpawn = 50;
     private float ySpawnRange = 11;
-    public GameObject[] obstacleOrGifts;
+    public GameObject[] objects;
+    public GameObject[] clouds;
     public GameObject powerup;
     private PlayerController playerScript;
 
@@ -20,6 +23,7 @@ public class SpawnManager : MonoBehaviour
     {
         InvokeRepeating("SpawnObjects", spawnDelay, spawnInterval);
         InvokeRepeating("SpawnPowerup", powerupSpawnDelay, powerupSpawnInterval);
+        InvokeRepeating("SpawnClouds", cloudSpawnDelay, cloudSpawnInterval);
         playerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         
     }
@@ -32,18 +36,27 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnObjects()
     {
-        Vector3 randomSpawn = new Vector3(xSpawnLimit, Random.Range(-ySpawnRange, ySpawnRange), 0);
-        int index = Random.Range(0, obstacleOrGifts.Length);
+        Vector3 randomSpawn = new Vector3(xSpawn, Random.Range(-ySpawnRange, ySpawnRange), 0);
+        int index = Random.Range(0, objects.Length);
 
-        Instantiate(obstacleOrGifts[index], randomSpawn, obstacleOrGifts[index].transform.rotation);
+        Instantiate(objects[index], randomSpawn, objects[index].transform.rotation);
     }
 
     void SpawnPowerup()
     {
-        Vector3 randomSpawn = new Vector3(xSpawnLimit, Random.Range(-ySpawnRange, ySpawnRange), 0);
+        Vector3 randomSpawn = new Vector3(xSpawn, Random.Range(-ySpawnRange, ySpawnRange), 0);
 
         Instantiate(powerup, randomSpawn, powerup.transform.rotation);
 
+
+    }
+
+    void SpawnClouds()
+    {
+        Vector3 randomSpawn = new Vector3(xSpawn, Random.Range(-ySpawnRange, ySpawnRange), 10);
+        int index = Random.Range(0, clouds.Length);
+
+        Instantiate(clouds[index], randomSpawn, objects[index].transform.rotation);
 
     }
 }

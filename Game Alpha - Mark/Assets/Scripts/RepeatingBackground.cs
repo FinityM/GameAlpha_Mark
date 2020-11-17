@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Will not use for illusion of background moving 
+ */
 public class RepeatingBackground : MonoBehaviour
 {
     private float repeatWidth;

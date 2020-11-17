@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveLeft : MonoBehaviour
 {
     public float speed;
-    private float toTheLeft = -34;
+    private float toTheLeft = 50;
     private PlayerController playerScript;
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class MoveLeft : MonoBehaviour
 
     void destroyObject()
     {
-        if (transform.position.x < toTheLeft && !gameObject.CompareTag("Background"))
+        if (transform.position.x < -toTheLeft && !gameObject.CompareTag("Background"))
         {
             Destroy(gameObject);
         }

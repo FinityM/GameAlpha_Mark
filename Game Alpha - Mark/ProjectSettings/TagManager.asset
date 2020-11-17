@@ -8,6 +8,8 @@ TagManager:
   - Goodies
   - Obstacle
   - Powerup
+  - Background
+  - Clouds
   layers:
   - Default
   - TransparentFX
