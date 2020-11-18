@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 /**
- * Will not use for illusion of background moving 
+ * Will not use for illusion of background moving delete this in beta
  */
 public class RepeatingBackground : MonoBehaviour
 {
