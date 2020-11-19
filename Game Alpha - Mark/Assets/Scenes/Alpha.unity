@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!198 &477131101 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5449310780449324177, guid: 2e9750981cb03e34f9c801193ccfc76f,
+    type: 3}
+  m_PrefabInstance: {fileID: 5449310779110311160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &615315116
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,7 +434,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d806460d6edc6614c90e5a72bff9c637, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -749,6 +755,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5449310778537234377, guid: 2e9750981cb03e34f9c801193ccfc76f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5449310778537234381, guid: 2e9750981cb03e34f9c801193ccfc76f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -807,6 +818,20 @@ PrefabInstance:
     - target: {fileID: 1911498364, guid: 2e9750981cb03e34f9c801193ccfc76f, type: 3}
       propertyPath: gameOver
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1911498364, guid: 2e9750981cb03e34f9c801193ccfc76f, type: 3}
+      propertyPath: pickedItemParticle
+      value: 
+      objectReference: {fileID: 477131101}
+    - target: {fileID: 2144013087872662687, guid: 2e9750981cb03e34f9c801193ccfc76f,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7566282239042158177, guid: 2e9750981cb03e34f9c801193ccfc76f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Rudolph
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e9750981cb03e34f9c801193ccfc76f, type: 3}

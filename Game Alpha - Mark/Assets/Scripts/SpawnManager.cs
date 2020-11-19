@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     private float cloudSpawnInterval = 5f; 
     private float xSpawn = 50;
     private float ySpawnRange = 11;
+
     public GameObject[] objects;
     public GameObject[] clouds;
     public GameObject powerup;
@@ -57,6 +58,11 @@ public class SpawnManager : MonoBehaviour
         int index = Random.Range(0, clouds.Length);
 
         Instantiate(clouds[index], randomSpawn, objects[index].transform.rotation);
+
+    }
+
+    public void GameOver()
+    {
 
     }
 }

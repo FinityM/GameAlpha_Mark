@@ -11,6 +11,7 @@ TagManager:
   - Background
   - Clouds
   - Missile
+  - Rudolph
   layers:
   - Default
   - TransparentFX
