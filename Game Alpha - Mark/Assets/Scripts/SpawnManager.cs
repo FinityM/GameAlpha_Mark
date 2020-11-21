@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    // Improve this to cut down on the code with a GameManager Script 
     private float spawnDelay = 1.5f;
     private float spawnInterval = 3f;
     private float powerupSpawnDelay = 3f;
