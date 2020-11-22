@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public bool gameOver;
 
     private GameObject rudolphObject;
+    private Collider playerCollider;
     private Rigidbody playerRB;
     private AudioSource playerAudio;
     public AudioClip goodiesSound;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rudolphObject = GameObject.Find("Rudolph");
+        playerCollider = GetComponent<BoxCollider>();
         playerRB = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
     }
@@ -100,6 +102,7 @@ public class PlayerController : MonoBehaviour
             explodeParticle.Play();    
             gameOver = true;
             rudolphObject.SetActive(false);
+            playerCollider.enabled = !playerCollider.enabled;
             Debug.Log("Game Over");
             Destroy(other.gameObject);
         }
@@ -110,6 +113,7 @@ public class PlayerController : MonoBehaviour
             explodeParticle.Play();      
             gameOver = true;
             rudolphObject.SetActive(false);
+            playerCollider.enabled = !playerCollider.enabled;
             Debug.Log("Game Over");
             Destroy(other.gameObject);
         }
