@@ -12,6 +12,7 @@ TagManager:
   - Clouds
   - Missile
   - Rudolph
+  - Game Manager
   layers:
   - Default
   - TransparentFX

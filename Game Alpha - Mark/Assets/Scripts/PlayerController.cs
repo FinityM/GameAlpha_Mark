@@ -6,10 +6,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float speed = 20.0f;
-    private float verticalInput;
-    private float horizontalInput;
     private float xBound = 16;
     private float yBound = 11;
+    private float verticalInput;
+    private float horizontalInput;
+    public int pointValue;
     public bool gameOver;
 
     private GameObject rudolphObject;
@@ -20,10 +21,12 @@ public class PlayerController : MonoBehaviour
     public AudioClip explosionSound;
     public ParticleSystem pickedItemParticle;
     public ParticleSystem explodeParticle;
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         rudolphObject = GameObject.Find("Rudolph");
         playerCollider = GetComponent<BoxCollider>();
         playerRB = GetComponent<Rigidbody>();
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movement();
-        
+
     }
 
     // Method for movement
@@ -46,36 +49,39 @@ public class PlayerController : MonoBehaviour
         //Get the horizontal input
         horizontalInput = Input.GetAxis("Horizontal");
 
-        if (!gameOver)
+        if (gameManager.isGameActive)
         {
-            // Move around the screen
-            transform.position = transform.position + new Vector3(0, verticalInput * speed * Time.deltaTime, 0);
-            transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
-
-
-            //Limit the x and y axis movement won't work will return to this later   
-            if (transform.position.x > xBound)
             {
-                transform.position = new Vector3(xBound, transform.position.y, transform.position.z);
-            }
+                // Move around the screen
+                transform.position = transform.position + new Vector3(0, verticalInput * speed * Time.deltaTime, 0);
+                transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
 
-            else if (transform.position.x < -xBound)
-            {
-                transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
-            }
 
-            if (transform.position.y > yBound)
-            {
-                transform.position = new Vector3(transform.position.x, yBound, transform.position.z);
-            }
+                //Limit the x and y axis movement won't work will return to this later   
+                if (transform.position.x > xBound)
+                {
+                    transform.position = new Vector3(xBound, transform.position.y, transform.position.z);
+                }
 
-            else if (transform.position.y < -yBound)
-            {
-                transform.position = new Vector3(transform.position.x, -yBound, transform.position.z);
-            }
+                else if (transform.position.x < -xBound)
+                {
+                    transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
+                }
 
+                if (transform.position.y > yBound)
+                {
+                    transform.position = new Vector3(transform.position.x, yBound, transform.position.z);
+                }
+
+                else if (transform.position.y < -yBound)
+                {
+                    transform.position = new Vector3(transform.position.x, -yBound, transform.position.z);
+                }
+
+            }
         }
-       
+
+
 
     }
 
@@ -84,9 +90,10 @@ public class PlayerController : MonoBehaviour
         //Will make power up functional in beta will act like goodie for now
         if (other.gameObject.CompareTag("Powerup"))
         {
-            playerAudio.PlayOneShot(goodiesSound, 1.0f); //Causing issues for me because it's using a default value of null which I have no clue why
+            playerAudio.PlayOneShot(goodiesSound, 1.0f);
             pickedItemParticle.Play();
             Destroy(other.gameObject);
+            gameManager.UpdateScore(30);
         }
 
         else if (other.gameObject.CompareTag("Goodies"))
@@ -94,28 +101,31 @@ public class PlayerController : MonoBehaviour
             playerAudio.PlayOneShot(goodiesSound, 1.0f);
             pickedItemParticle.Play();
             Destroy(other.gameObject);
+            gameManager.UpdateScore(5);
         }
 
         else if (other.gameObject.CompareTag("Obstacle"))
         {
             playerAudio.PlayOneShot(explosionSound, 1.0f);
-            explodeParticle.Play();    
-            gameOver = true;
+            explodeParticle.Play();
+            gameManager.isGameActive = false;
             rudolphObject.SetActive(false);
             playerCollider.enabled = !playerCollider.enabled;
             Debug.Log("Game Over");
             Destroy(other.gameObject);
+            gameManager.GameOver();
         }
-        
+
         else if (other.gameObject.CompareTag("Missile"))
         {
             playerAudio.PlayOneShot(explosionSound, 1.0f);
-            explodeParticle.Play();      
-            gameOver = true;
+            explodeParticle.Play();
+            gameManager.isGameActive = false;
             rudolphObject.SetActive(false);
             playerCollider.enabled = !playerCollider.enabled;
             Debug.Log("Game Over");
             Destroy(other.gameObject);
+            gameManager.GameOver();
         }
     }
 }

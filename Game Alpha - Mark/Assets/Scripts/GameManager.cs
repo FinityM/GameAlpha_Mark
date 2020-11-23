@@ -1,22 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     private float objectSpawnRate = 3.0f;
     private float xSpawn = 50;
     private float ySpawnRange = 11;
+    private int score;
+    public bool isGameActive;
 
     public List<GameObject> objects;
     public List<GameObject> clouds;
     public GameObject powerup;
 
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameOverText;
+
+    public Button restartButton;
+
     // Start is called before the first frame update
     void Start()
     {
+        isGameActive = true;
         StartCoroutine(Spawner());
-
+        score = 0;
+        scoreText.text = "Score: " + score;
     }
 
     // Update is called once per frame
@@ -27,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator Spawner()
     {
-        while (true)
+        while (isGameActive)
         {
             yield return new WaitForSeconds(objectSpawnRate);
             Vector3 randomSpawn = new Vector3(xSpawn, Random.Range(-ySpawnRange, ySpawnRange), 0);
@@ -44,4 +56,26 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    
+   public void UpdateScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        scoreText.text = "Score: " + score;
+    }
+
+    
+    public void GameOver()
+    {
+        isGameActive = false;
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("Test");
+    }   
+    
 }
