@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     private float objectSpawnRate = 3.0f;
     private float xSpawn = 50;
-    private float ySpawnRange = 11;
+    private float ySpawnRange = 10;
     private int score;
     public bool isGameActive;
 
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         while (isGameActive)
         {
+            scoreText.gameObject.SetActive(true);
             yield return new WaitForSeconds(objectSpawnRate);
             Vector3 randomSpawn = new Vector3(xSpawn, Random.Range(-ySpawnRange, ySpawnRange), 0);
             Vector3 cloudRandomSpawn = new Vector3(xSpawn, Random.Range(-ySpawnRange, ySpawnRange), 10);
@@ -75,7 +76,6 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Debug.Log("Test");
     }   
     
 }

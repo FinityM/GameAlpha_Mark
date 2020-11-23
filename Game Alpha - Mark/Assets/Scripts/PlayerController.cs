@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     private GameObject rudolphObject;
     private Collider playerCollider;
-    private Rigidbody playerRB;
     private AudioSource playerAudio;
     public AudioClip goodiesSound;
     public AudioClip explosionSound;
@@ -29,7 +28,6 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         rudolphObject = GameObject.Find("Rudolph");
         playerCollider = GetComponent<BoxCollider>();
-        playerRB = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
     }
 
@@ -51,34 +49,33 @@ public class PlayerController : MonoBehaviour
 
         if (gameManager.isGameActive)
         {
+            // Move around the screen
+            transform.position = transform.position + new Vector3(0, verticalInput * speed * Time.deltaTime, 0);
+            transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
+
+
+            //Limit the x and y axis movement 
+            if (transform.position.x > xBound)
             {
-                // Move around the screen
-                transform.position = transform.position + new Vector3(0, verticalInput * speed * Time.deltaTime, 0);
-                transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
-
-
-                //Limit the x and y axis movement won't work will return to this later   
-                if (transform.position.x > xBound)
-                {
-                    transform.position = new Vector3(xBound, transform.position.y, transform.position.z);
-                }
-
-                else if (transform.position.x < -xBound)
-                {
-                    transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
-                }
-
-                if (transform.position.y > yBound)
-                {
-                    transform.position = new Vector3(transform.position.x, yBound, transform.position.z);
-                }
-
-                else if (transform.position.y < -yBound)
-                {
-                    transform.position = new Vector3(transform.position.x, -yBound, transform.position.z);
-                }
-
+                transform.position = new Vector3(xBound, transform.position.y, transform.position.z);
             }
+
+            else if (transform.position.x < -xBound)
+            {
+                transform.position = new Vector3(-xBound, transform.position.y, transform.position.z);
+            }
+
+            if (transform.position.y > yBound)
+            {
+                transform.position = new Vector3(transform.position.x, yBound, transform.position.z);
+            }
+
+            else if (transform.position.y < -yBound)
+            {
+                transform.position = new Vector3(transform.position.x, -yBound, transform.position.z);
+            }
+
+
         }
 
 
