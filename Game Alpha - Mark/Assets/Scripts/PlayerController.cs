@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movement();
-
     }
 
     // Method for movement
@@ -49,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
         if (gameManager.isGameActive)
         {
+            //rudolphObject.SetActive(true); Figure out how to make player appear in beta
+
             // Move around the screen
             transform.position = transform.position + new Vector3(0, verticalInput * speed * Time.deltaTime, 0);
             transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, 0, 0);
@@ -77,9 +78,6 @@ public class PlayerController : MonoBehaviour
 
 
         }
-
-
-
     }
 
     private void OnCollisionEnter(Collision other)
